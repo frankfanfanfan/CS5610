@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>note</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  <input id="jobName">
+  <button id="jobSearch" onclick="searchJobs()">SEARCH</button>
+  <ul id="jobList">
+  </ul>
+
+  <script>
+
+    function searchJobs() {
+      var input = $("#jobName").val();
+      var url = "https://jobs.github.com/positions.json?description=" +
+        input + "&location=seattle";
+      searchQuery(url);
+      // alert(url);
+    }
+
+    function searchQuery(url) {
+
+      $.get(
+        url,
+        function(response) {
+          var jobList = $("#jobList");
+          jobList.empty();
+          var jobs = response;
+          for (var i = 0; i < jobs.length; i++) {
+            var jobsLi = $("<li></li>");
+            var jobName = jobs[i].title;
+            jobsLi.append(jobName);
+            jobList.append(jobsLi);
+          }
+        },
+        'JSONP'
+      );
+    }
+
+  </script>
+</body>
+</html>

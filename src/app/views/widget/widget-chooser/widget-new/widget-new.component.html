@@ -1,0 +1,25 @@
+<div [ngSwitch]="wgType">
+
+  <div *ngSwitchCase="'header'">
+    <app-new-header></app-new-header>
+  </div>
+
+  <div *ngSwitchCase="'image'">
+    <app-new-image></app-new-image>
+  </div>
+
+  <div *ngSwitchCase="'youtube'">
+    <app-new-youtube></app-new-youtube>
+  </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Register</h1>
+  <input [(ngModel)]="username" type="text"
+         class="form-control"
+         placeholder="username"/>
+  <input [(ngModel)]="password" type="password"
+         class="form-control"
+         placeholder="password"/>
+  <input [(ngModel)]="passVal" type="password"
+         class="form-control"
+         placeholder="very password"/>
+
+  <button routerLink="/login" class="btn btn-primary btn-block" (click)="createUser(username, password, passVal)">Register</button>
+  <a class="btn btn-danger  btn-block"
+     routerLink="/login">Cancel</a>
+
+</div>

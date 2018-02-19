@@ -1,0 +1,52 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a routerLink=".." class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink=".." class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+      Widgets Edit
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="form-group">
+    <label for="youtube-name">Name</label>
+    <input type="text" class="form-control" id="youtube-name" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="youtube-text">Text</label>
+    <input [(ngModel)]="text" type="text" class="form-control" id="youtube-text" placeholder="Text">
+  </div>
+  <div class="form-group">
+    <label for="youtube-URL">URL</label>
+    <input [(ngModel)]="url" type="text" class="form-control" id="youtube-URL" placeholder="URL">
+  </div>
+  <div class="form-group">
+    <label for="youtube-width">Width</label>
+    <input [(ngModel)]="width" type="text" class="form-control" id="youtube-width" placeholder="100%">
+  </div>
+  <button routerLink="../.." class="btn btn-success btn-block" (click)="createYoutube(text, url, width)">Create</button>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>
