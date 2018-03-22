@@ -48,8 +48,8 @@
       <textarea [(ngModel)]="curWebsite.description" id="website-description" class="form-control" rows="5"
                 placeholder={{curWebsite.description}}></textarea>
     </div>
-    <button routerLink=".." class="btn btn-success btn-block" (click)="updateWebsite(curWebsite)">Update</button>
-    <button routerLink=".." class="btn btn-danger btn-block" (click)="deleteWebsite(curWebsite._id)">Delete</button>
+    <button class="btn btn-success btn-block" (click)="updateWebsite(curWebsite)">Update</button>
+    <button class="btn btn-danger btn-block" (click)="deleteWebsite(curWebsite._id)">Delete</button>
   </div>
 </div>
 

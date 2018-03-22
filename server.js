@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'src/assets/uploads')));
 
 
 
@@ -47,4 +48,11 @@ app.get('*', function (req, res) {
 });
 
 
-server.listen( port , () => console.log('Running on port 3100'));
+
+require("./assignment/app")(app);
+
+
+// server.listen( port , () => console.log('Running on port 3100'));
+
+server.listen( port , function() {
+  console.log('Node app is running on port', app.get('port'))});

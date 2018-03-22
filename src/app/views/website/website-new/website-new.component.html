@@ -46,7 +46,7 @@
       <label for="website-description">Description</label>
       <textarea [(ngModel)]="webDes" id="website-description" class="form-control" rows="5" placeholder="Description"></textarea>
     </div>
-    <button routerLink="/user/{{userId}}/website" class="btn btn-success btn-block" (click)="createWebsite(webName, webDes)">Create</button>
+    <button class="btn btn-success btn-block" (click)="createWebsite(webName, webDes)">Create</button>
   </div>
 </div>
 

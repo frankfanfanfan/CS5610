@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../../../services/widget.service.client';
 import {Widget} from '../../../../../models/widget.model.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-youtube',
@@ -13,11 +13,16 @@ export class NewYoutubeComponent implements OnInit {
   pageId;
   constructor(
     private widgetService: WidgetService,
-    private activateRoute: ActivatedRoute) { }
+    private activateRoute: ActivatedRoute,
+    private router: Router) { }
 
   createYoutube(text, url, width) {
     const newYoutube = new Widget('', 'YOUTUBE', '', '', text, width, url);
-    this.widgetService.createWidget(this.pageId, newYoutube);
+    this.widgetService.createWidget(this.pageId, newYoutube).subscribe(
+      () => {
+        this.router.navigate(['../..'], {relativeTo: this.activateRoute});
+      }
+    );
   }
 
   ngOnInit() {

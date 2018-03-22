@@ -15,11 +15,15 @@ export class RegisterComponent implements OnInit {
   createUser(username, pass, passVal) {
     if (passVal === pass) {
       const newUser = new User('', username, pass);
-      this.userService.createUser(newUser);
+      // this.userService.createUser(newUser);
+      this.userService.createUser(newUser).subscribe(
+        (user: User) => {
+          console.log(user);
+        }
+      );
     } else {
       alert('Password not match');
     }
-
   }
 
   ngOnInit() {

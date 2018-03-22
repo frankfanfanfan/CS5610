@@ -32,8 +32,8 @@
     <label for="heading-size">Size</label>
     <input [(ngModel)]="curWidget.size" type="text" class="form-control" id="heading-size" placeholder="3">
   </div>
-  <button routerLink=".." class="btn btn-success btn-block" (click)="updateWidget(curWidget)">Update</button>
-  <button routerLink=".." class="btn btn-danger btn-block" (click)="deleteWidget(curWidget._id)">Delete</button>
+  <button class="btn btn-success btn-block" (click)="updateWidget(curWidget)">Update</button>
+  <button class="btn btn-danger btn-block" (click)="deleteWidget(curWidget._id)">Delete</button>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

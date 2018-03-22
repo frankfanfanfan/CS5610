@@ -36,13 +36,23 @@
     <label for="image-width">Width</label>
     <input [(ngModel)]="width" type="text" class="form-control" id="image-width" placeholder="100%">
   </div>
-  <div class="form-group">
-    <label for="exampleInputFile">Upload</label>
-    <input type="file" class="form-control" id="exampleInputFile">
-  </div>
+  <!--<div class="form-group">-->
+    <!--<label for="exampleInputFile">Upload</label>-->
+    <!--<input type="file" class="form-control" id="exampleInputFile">-->
+  <!--</div>-->
 
-  <a class="btn btn-primary btn-block" >Upload Image</a>
-  <button routerLink="../.." class="btn btn-success btn-block" (click)="createImage(text, url, width)">Create</button>
+  <!--<a class="btn btn-primary btn-block" >Upload Image</a>-->
+  <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
+    <input  name="myFile"   type="file" class="form-control"/>
+    <input  name="widgetId" value="{{wgId}}"   style="display: none"/>
+    <input  name="websiteId" value="{{webId}}"   style="display: none"/>
+    <input  name="pageId" value="{{pageId}}"   style="display: none"/>
+    <input  name="userId" value="{{userId}}"   style="display: none"/>
+    <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+    <br/>
+  </form>
+
+  <button class="btn btn-success btn-block" (click)="createImage(text, url, width)">Create</button>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

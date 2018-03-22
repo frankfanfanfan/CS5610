@@ -1,46 +1,49 @@
 import { User } from '../models/user.model.client';
 import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import 'rxjs/Rx';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class UserService {
-  users: User[] = [
-    new User('123', 'alice', 'qq'),
-    new User('234', 'bob', 'qq'),
-    new User('345', 'charlie', 'qq')
-  ];
 
-  createUser(user: User) {
-    this.users.push(new User((new Date()).getTime() + '', user.username, user.password));
+  constructor(private http: Http) {}
+
+  baseUrl = environment.baseUrl;
+
+  findUserByCredential(username, password) {
+    const url = this.baseUrl + '/api/user?username=' + username + '&password=' + password;
+    return this.http.get(url).map((response: Response) => {
+        return response.json();
+      });
   }
 
-  findUserByCredential(username: String, password: String) {
-    return this.users.find( function (user) {
-      return user.username === username && user.password === password;
+  findUserById(userId) {
+    console.log(userId);
+    const url = this.baseUrl + '/api/user/' + userId;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
     });
   }
 
-  findUserById(userId: String) {
-    return this.users.find(function(user) {
-      return user._id === userId;
+  updateUser(user) {
+    const url = this.baseUrl + '/api/user/' + user._id;
+    return this.http.put(url, user).map((response: Response) => {
+      return response.json();
     });
   }
 
-  updateUser(user: User) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]._id === user._id) {
-        this.users[i].firstName = user.firstName;
-        this.users[i].lastName = user.lastName;
-        return this.users[i];
-      }
-    }
+  createUser(user) {
+    const url = this.baseUrl + '/api/user';
+    return this.http.post(url, user).map((response: Response) => {
+      return response.json();
+    });
   }
 
-  deleteUserById(userId: String) {
-    for (const i in this.users) {
-      if (this.users[i]._id === userId) {
-        const j = +i;
-        this.users.splice(j, 1);
-      }
-    }
+  deleteUserById(userId) {
+    const url = this.baseUrl + '/api/user/' + userId;
+    return this.http.delete(url).map((response: Response) => {
+      return response.json();
+    });
   }
 }

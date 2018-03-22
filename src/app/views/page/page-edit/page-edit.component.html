@@ -28,8 +28,8 @@
     <label for="page-title">Title</label>
     <input [(ngModel)]="curPage.title" type="text" class="form-control" id="page-title" placeholder="Page Title">
   </div>
-  <button routerLink=".." class="btn btn-success btn-block" (click)="updatePage(curPage)">Update</button>
-  <button routerLink=".." class="btn btn-danger btn-block" (click)="deletePage(curPage._id)">Delete</button>
+  <button class="btn btn-success btn-block" (click)="updatePage(curPage)">Update</button>
+  <button class="btn btn-danger btn-block" (click)="deletePage(curPage._id)">Delete</button>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../../../services/widget.service.client';
 import {Widget} from '../../../../../models/widget.model.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-header',
@@ -13,11 +13,16 @@ export class NewHeaderComponent implements OnInit {
   pageId;
   constructor(
     private widgetService: WidgetService,
-    private activateRoute: ActivatedRoute) { }
+    private activateRoute: ActivatedRoute,
+    private router: Router) { }
 
   createHeader(text, size) {
     const newHeader = new Widget('', 'HEADER', '', size, text, '', '');
-    this.widgetService.createWidget(this.pageId, newHeader);
+    this.widgetService.createWidget(this.pageId, newHeader).subscribe(
+      () => {
+        this.router.navigate(['../..'], {relativeTo: this.activateRoute});
+      }
+    );
   }
 
   ngOnInit() {

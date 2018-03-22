@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WebsiteService} from '../../../services/website.service.client';
 import {Website} from '../../../models/website.model.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-website-edit',
@@ -16,23 +16,43 @@ export class WebsiteEditComponent implements OnInit {
 
   constructor(
     private websiteService: WebsiteService,
-    private activateRoute: ActivatedRoute) { }
+    private activateRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
-  updateWebsite(website) {
-    console.log(website);
-    this.websiteService.updateWebsite(website);
+  updateWebsite(newWebsite) {
+    this.websiteService.updateWebsite(newWebsite).subscribe(
+      (website: Website) => {
+        this.curWebsite = website;
+        this.router.navigate(['../'], {relativeTo: this.activateRoute});
+      }
+    );
   }
 
   deleteWebsite(wid) {
-    this.websiteService.deleteWebsite(wid);
+    this.websiteService.deleteWebsite(wid).subscribe(
+      () => {
+        this.router.navigate(['../'], {relativeTo: this.activateRoute});
+      }
+    );
   }
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
       this.userId = params['uid'];
-      const preWebsite = this.websiteService.findWebsitesById(params['wid']);
-      this.curWebsite = Object.assign({}, preWebsite);
-      this.websites = this.websiteService.findWebsitesByUser(this.userId);
+      // const preWebsite = this.websiteService.findWebsitesById(params['wid'])
+      //   .subscribe((website: Website) => {
+      //     this.curWebsite = website;
+      //   });
+      // this.curWebsite = Object.assign({}, preWebsite);
+      this.websiteService.findWebsitesById(params['wid'])
+        .subscribe((website: Website) => {
+          this.curWebsite = website;
+        });
+      this.websiteService.findWebsitesByUser(this.userId)
+        .subscribe((websites: Website[]) => {
+          this.websites = websites;
+        });
     });
   }
 
