@@ -18,6 +18,7 @@ module.exports = function(app){
   app.put("/api/widget/:widgetId", updateWidget);
   app.delete("/api/widget/:widgetId", deleteWidget);
   app.post ("/api/upload", upload.single('myFile'), uploadImage);
+  app.put("/api/page/:pageId/widget", sortWidget);
 
   function createWidget(req, res){
     var pageId = req.params['pageId'];
@@ -96,8 +97,8 @@ module.exports = function(app){
     var pageId = req.body.pageId;
 
     if (myFile == null || myFile == "") {
-      // return "http://localhost:4200/profile/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
-      return "https://frank-web-project.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+      return "http://localhost:4200/profile/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+      // return "https://frank-web-project.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
     }
 
     var originalname  = myFile.originalname; // file name on user's computer
@@ -134,9 +135,33 @@ module.exports = function(app){
 
     widget.url = '/uploads/'+filename;
 
-    var callbackUrl = "https://frank-web-project.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/";
-    // var callbackUrl = "http://localhost:4200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/";
+    // var callbackUrl = "https://frank-web-project.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/";
+    var callbackUrl = "http://localhost:4200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/";
     res.redirect(callbackUrl);
+  }
+
+  function sortWidget(req, res) {
+    var pageId = req.params['pageId'];
+    var initial = req.query["initial"];
+    var final = req.query["final"];
+
+    var tmpInitial = 0;
+    var tmpFinal = 0;
+    var count = 0;
+
+    for (var i = 0; i < WIDGETS.length; i++) {
+      if (WIDGETS[i].pageId == pageId) {
+        if (initial == count) tmpInitial = i;
+        if (final == count) tmpFinal = i;
+        count++;
+      }
+    }
+
+    var preWidget = WIDGETS[initial];
+    WIDGETS.splice(tmpInitial, 1);
+    WIDGETS.splice(tmpFinal, 0, preWidget);
+    res.json(WIDGETS);
+
   }
 
 }

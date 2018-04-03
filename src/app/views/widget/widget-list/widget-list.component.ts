@@ -25,6 +25,11 @@ export class WidgetListComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url.toString().replace('watch?v=', 'embed/'));
   }
 
+  sortWidgets(indexes) {
+    this.widgetService.sortWidgets(this.pageId, indexes.startIndex, indexes.endIndex).subscribe(
+      (data) => console.log(data));
+  }
+
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
       this.userId = params['uid'];

@@ -29,6 +29,9 @@ import { NewImageComponent } from './views/widget/widget-chooser/widget-new/new-
 import { NewHeaderComponent } from './views/widget/widget-chooser/widget-new/new-header/new-header.component';
 import { NewYoutubeComponent } from './views/widget/widget-chooser/widget-new/new-youtube/new-youtube.component';
 import {HttpModule} from '@angular/http';
+import { FlickrImageSearchComponent } from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import {FlickrService} from './services/flickr.service.client';
+import {SortableDirective} from '../../assignment/directives/sortable.directive';
 
 
 @NgModule({
@@ -52,7 +55,9 @@ import {HttpModule} from '@angular/http';
     WidgetNewComponent,
     NewImageComponent,
     NewHeaderComponent,
-    NewYoutubeComponent
+    NewYoutubeComponent,
+    FlickrImageSearchComponent,
+    SortableDirective
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,7 @@ import {HttpModule} from '@angular/http';
     Routing,
     HttpModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

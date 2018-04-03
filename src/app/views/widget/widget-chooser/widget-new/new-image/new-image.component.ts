@@ -37,7 +37,7 @@ export class NewImageComponent implements OnInit {
       this.userId = params['uid'];
       this.webId = params['wid'];
       this.pageId = params['pid'];
-      this.wgId = params['wgid'];
+      this.wgId = 'newId';
     });
   }
 }

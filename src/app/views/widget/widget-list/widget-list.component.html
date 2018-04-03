@@ -19,7 +19,7 @@
   </div>
 </nav>
 
-<div class="container cl-container-padding">
+<div class="container cl-container-padding" appSortable (newIndexes)="sortWidgets($event)">
   <div *ngFor="let widget of widgets" [ngSwitch]="widget.widgetType">
     <div *ngSwitchCase="'HEADER'">
       <div class="pull-right">
