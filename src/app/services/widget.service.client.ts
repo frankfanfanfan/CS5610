@@ -14,7 +14,7 @@ export  class WidgetService {
   createWidget(pageId: String, widget: Widget) {
     const url = this.baseUrl + '/api/page/' + pageId + '/widget';
     return this.http.post(url, widget).map((response: Response) => {
-      return response.json();
+      // return response.json();
     });
   }
 
@@ -48,8 +48,9 @@ export  class WidgetService {
 
   sortWidgets(pageId, initialIndex, finalIndex) {
     const url = this.baseUrl + '/api/page/' + pageId + '/widget?initial=' + initialIndex + '&final=' + finalIndex;
-    return this.http.put(url, '').map((response: Response) => {
-      return response.json();
-    });
+    return this.http.put(url, '');
+    //   .map((response: Response) => {
+    //   return response.json();
+    // });
   }
 }

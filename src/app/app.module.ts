@@ -32,6 +32,11 @@ import {HttpModule} from '@angular/http';
 import { FlickrImageSearchComponent } from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import {FlickrService} from './services/flickr.service.client';
 import {SortableDirective} from '../../assignment/directives/sortable.directive';
+import {QuillEditorModule} from 'ngx-quill-editor/quillEditor.module';
+import { NewHtmlComponent } from './views/widget/widget-chooser/widget-new/new-html/new-html.component';
+import { NewTextComponent } from './views/widget/widget-chooser/widget-new/new-text/new-text.component';
+import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
+import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 
 
 @NgModule({
@@ -57,13 +62,18 @@ import {SortableDirective} from '../../assignment/directives/sortable.directive'
     NewHeaderComponent,
     NewYoutubeComponent,
     FlickrImageSearchComponent,
-    SortableDirective
+    SortableDirective,
+    NewHtmlComponent,
+    NewTextComponent,
+    WidgetTextComponent,
+    WidgetHtmlComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     Routing,
-    HttpModule
+    HttpModule,
+    QuillEditorModule
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]

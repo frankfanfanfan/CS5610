@@ -17,7 +17,7 @@ export class NewYoutubeComponent implements OnInit {
     private router: Router) { }
 
   createYoutube(text, url, width) {
-    const newYoutube = new Widget('', 'YOUTUBE', '', '', text, width, url);
+    const newYoutube = new Widget(undefined, 'YOUTUBE', '', 1, text, width, url);
     this.widgetService.createWidget(this.pageId, newYoutube).subscribe(
       () => {
         this.router.navigate(['../..'], {relativeTo: this.activateRoute});

@@ -19,7 +19,7 @@ export class WebsiteNewComponent implements OnInit {
     private router: Router) {}
 
   createWebsite(webName, webDes) {
-    const newWebsite = new Website('', webName, '', webDes);
+    const newWebsite = new Website(undefined, webName, '', webDes);
     this.websiteService.createWebsite(this.userId, newWebsite).subscribe(
       () => {
         this.router.navigate(['../'], {relativeTo: this.activateRoute});

@@ -21,7 +21,7 @@
 
 <div class="container cl-container-padding" appSortable (newIndexes)="sortWidgets($event)">
   <div *ngFor="let widget of widgets" [ngSwitch]="widget.widgetType">
-    <div *ngSwitchCase="'HEADER'">
+    <div *ngSwitchCase="'HEADING'">
       <div class="pull-right">
         <a class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
@@ -47,13 +47,13 @@
         <a class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
-        <a>
+        <a routerLink="{{widget._id}}">
           <span class="glyphicon glyphicon-cog"></span>
         </a>
       </div>
-      <h1>{{widget.text}}</h1>
+      <div [innerHTML]="widget.text"></div>
     </div>
-    <div *ngSwitchCase="'YOUTUBE'">
+    <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
       <div class="embed-responsive embed-responsive-16by9">
         <iframe width="640" height="360" [src]=getUrl(widget.url) frameborder="0" allowfullscreen></iframe>
         <a class="pull-right">
@@ -63,6 +63,26 @@
           <span class="glyphicon glyphicon-cog" style="background-color: white"></span>
         </a>
       </div>
+    </div>
+
+    <div *ngSwitchCase="'TEXT'">
+      <a class="pull-right">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </a>
+      <a routerLink="{{widget._id}}" class="pull-right">
+        <span class="glyphicon glyphicon-cog"></span>
+      </a>
+      <div *ngIf="widget.formatted">
+        <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+      </div>
+
+      <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+             placeholder="{{widget.placeholder}}" class="form-control"/>
+
+      <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                class="form-control">{{widget.text}}</textarea>
+
     </div>
   </div>
 

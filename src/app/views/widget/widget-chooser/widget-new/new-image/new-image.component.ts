@@ -23,7 +23,7 @@ export class NewImageComponent implements OnInit {
     private router: Router) { }
 
   createImage(text, url, width) {
-    const newImage = new Widget('', 'IMAGE', '', '', text, width, url);
+    const newImage = new Widget(undefined, 'IMAGE', '', 1, text, width, url);
     this.widgetService.createWidget(this.pageId, newImage).subscribe(
       () => {
         this.router.navigate(['../..'], {relativeTo: this.activateRoute});

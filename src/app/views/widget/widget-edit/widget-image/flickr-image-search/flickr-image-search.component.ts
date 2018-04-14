@@ -46,7 +46,7 @@ export class FlickrImageSearchComponent implements OnInit {
     url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
 
     if (this.widgetId === 'newId') {
-      const newImage = new Widget('', 'IMAGE', '', '', '', '', url);
+      const newImage = new Widget(undefined, 'IMAGE', '', 1, '', '', url);
       this.widgetService.createWidget(this.pageId, newImage).subscribe(
         () => {
           this.router.navigate(['../..'], {relativeTo: this.activateRoute});

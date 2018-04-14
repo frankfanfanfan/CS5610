@@ -1,0 +1,61 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a routerLink=".." class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink=".." class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+      Widgets Edit
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="form-group">
+    <label for="text-name">Name</label>
+    <input [(ngModel)]="curWidget.name" type="text" class="form-control" id="text-name" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="text-text">Text</label>
+    <input [(ngModel)]="curWidget.text" type="text" class="form-control" id="text-text" placeholder="Text">
+  </div>
+  <div class="form-group">
+    <label for="text-rows">Rows</label>
+    <input [(ngModel)]="curWidget.rows" type="number" class="form-control" id="text-rows" placeholder="Rows">
+  </div>
+  <div class="form-group">
+    <label for="text-holder">PlaceHolder</label>
+    <input [(ngModel)]="curWidget.placeholder" type="text" class="form-control" id="text-holder" placeholder="PlaceHolder">
+  </div>
+  <div class="input-group">
+    <input type="text" readonly value="Formatted" class="form-control"/>
+    <span class="input-group-addon">
+        <input [(ngModel)]="curWidget.formatted" type="checkbox" [ngModelOptions]="{standalone:true}" />
+      </span>
+  </div>
+
+
+  <button class="btn btn-success btn-block" (click)="updateWidget(curWidget)">Update</button>
+  <button class="btn btn-danger btn-block" (click)="deleteWidget(curWidget._id)">Delete</button>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>

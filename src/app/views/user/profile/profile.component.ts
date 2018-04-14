@@ -17,9 +17,12 @@ export class ProfileComponent implements OnInit {
   updateUser(changed_user) {
     this.route.params.subscribe(params => {
       return this.userService.updateUser(changed_user).subscribe(
-        (user: User) => {
-          this.user = user;
+        () => {
+          console.log(changed_user);
         }
+        // (user: User) => {
+        //   this.user = user;
+        // }
       );
     });
   }

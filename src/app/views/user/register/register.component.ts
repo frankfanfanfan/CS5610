@@ -14,11 +14,11 @@ export class RegisterComponent implements OnInit {
 
   createUser(username, pass, passVal) {
     if (passVal === pass) {
-      const newUser = new User('', username, pass);
+      const newUser = new User(undefined, username, pass);
       // this.userService.createUser(newUser);
       this.userService.createUser(newUser).subscribe(
         (user: User) => {
-          console.log(user);
+          console.log(username);
         }
       );
     } else {

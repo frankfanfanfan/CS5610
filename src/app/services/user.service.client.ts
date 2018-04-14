@@ -26,16 +26,18 @@ export class UserService {
     });
   }
 
-  updateUser(user) {
+  updateUser(user: User) {
     const url = this.baseUrl + '/api/user/' + user._id;
     return this.http.put(url, user).map((response: Response) => {
+      console.log(user);
       return response.json();
     });
   }
 
-  createUser(user) {
+  createUser(user: User) {
     const url = this.baseUrl + '/api/user';
     return this.http.post(url, user).map((response: Response) => {
+      console.log(user);
       return response.json();
     });
   }

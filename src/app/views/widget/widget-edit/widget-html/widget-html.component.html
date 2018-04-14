@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a routerLink=".." class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink=".." class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+      Widgets Edit
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="form-group">
+    <label for="html-name">Name</label>
+    <input [(ngModel)]="curWidget.name" type="text" class="form-control" id="html-name" placeholder={{curWidget.name}}>
+  </div>
+  <div class="form-group">
+    <label for="html-text">HTML</label>
+    <quill-editor [(ngModel)]="curWidget.text" id="html-text" [ngModelOptions]="{standalone: true}"></quill-editor>
+  </div>
+  <button class="btn btn-success btn-block" (click)="updateWidget(curWidget)">Update</button>
+  <button class="btn btn-danger btn-block" (click)="deleteWidget(curWidget._id)">Delete</button>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>
