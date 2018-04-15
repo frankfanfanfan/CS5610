@@ -137,8 +137,8 @@ module.exports = function(app){
     var pageId = req.body.pageId;
 
     if (myFile == null || myFile == "") {
-      return "http://localhost:4200/profile/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
-      // return "https://frank-web-project.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+      // return "http://localhost:4200/profile/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+      return "https://frank-web-project.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
     }
 
     var originalname  = myFile.originalname; // file name on user's computer
@@ -196,7 +196,8 @@ module.exports = function(app){
             //   widget = null;
             //   res.send(widget);
             // }
-            res.redirect("http://localhost:4200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/")
+            // res.redirect("http://localhost:4200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
+            res.redirect("https://frank-web-project.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
           }, function(error) {
 
         });
@@ -206,7 +207,8 @@ module.exports = function(app){
             widget.url = url;
             widgetModel.updateWidget(widgetId, widget)
               .then(function (widget) {
-                  res.redirect("http://localhost:4200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
+                  // res.redirect("http://localhost:4200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
+                  res.redirect("https://frank-web-project.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
                 }, function() {
                   res.status(400).send("Upload error");
                 });
