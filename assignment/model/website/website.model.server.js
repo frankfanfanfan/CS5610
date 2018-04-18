@@ -40,13 +40,14 @@ function updateWebsite(websiteId, website) {
 }
 
 function deleteWebsite(websiteId) {
-  websiteModel.findById(websiteId)
+  return websiteModel.findById(websiteId)
     .then(function(website) {
       userModel.findUserById(website._user)
         .then(function(user) {
           user.websites.pull({_id: websiteId});
           user.save();
         })
+    }).then(function () {
+      return websiteModel.deleteOne({_id: websiteId});
     });
-  return websiteModel.deleteOne({_id: websiteId});
 }

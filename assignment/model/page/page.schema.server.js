@@ -9,7 +9,11 @@ var pageSchema = mongoose.Schema({
   name: String,
   title: String,
   description: String,
-  widgets: [widgetSchema],
+  // widgets: [widgetSchema],
+  widgets: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'widgetModel'
+  }],
   dateCreate: {
     type: Date,
     default: Date.now()

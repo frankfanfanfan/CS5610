@@ -40,15 +40,16 @@ function updatePage(pageId, page) {
 }
 
 function deletePage(pageId) {
-  pageModel.findById(pageId)
+  return pageModel.findById(pageId)
     .then(function(page) {
       websiteModel.findWebsiteById(page._website)
         .then(function(website) {
           website.pages.pull({_id: pageId});
           website.save();
         })
+    }).then(function () {
+      return pageModel.deleteOne({_id: pageId});
     });
-  return pageModel.deleteOne({_id: pageId});
 }
 
 

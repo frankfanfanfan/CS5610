@@ -13,12 +13,12 @@ widgetModel.reorderWidget = reorderWidget;
 
 module.exports = widgetModel;
 
-function createWidget(pageId, widget){
+function createWidget(pageId, widget) {
   widget._page = pageId;
   return widgetModel.create(widget)
-    .then(function(responseWidget) {
+    .then(function (responseWidget) {
       pageModel.findPageById(responseWidget._page)
-        .then(function(page) {
+        .then(function (page) {
           page.widgets.push(responseWidget);
           return page.save();
         });
@@ -28,7 +28,8 @@ function createWidget(pageId, widget){
 
 function findAllWidgetsForPage(pageId) {
   return pageModel.findPageById(pageId)
-    .then(function(page) {
+    .populate('widgets')
+    .then(function (page) {
       return page.widgets;
     });
 }
@@ -39,9 +40,9 @@ function findWidgetById(widgetId) {
 
 function updateWidget(widgetId, widget) {
   widgetModel.findById(widgetId)
-    .then(function(foundWidget) {
+    .then(function (foundWidget) {
       pageModel.findPageById(foundWidget._page)
-        .then(function(page) {
+        .then(function (page) {
           for (var i = 0; i < page.widgets.length; i++) {
             if (String(page.widgets[i]._id) === String(widgetId)) {
               page.widgets[i] = widget;
@@ -54,20 +55,21 @@ function updateWidget(widgetId, widget) {
 }
 
 function deleteWidget(widgetId) {
-  widgetModel.findById(widgetId)
-    .then(function(widget) {
+  return widgetModel.findById(widgetId)
+    .then(function (widget) {
       pageModel.findPageById(widget._page)
-        .then(function(page) {
+        .then(function (page) {
           page.widgets.pull({_id: widgetId});
           page.save();
         })
+    }).then(function () {
+      return widgetModel.deleteOne({_id: widgetId})
     });
-  return widgetModel.deleteOne({_id: widgetId});
 }
 
 function reorderWidget(pageId, start, end) {
   return pageModel.findPageById(pageId)
-    .then(function(page) {
+    .then(function (page) {
       const preWidget = page.widgets[start];
       page.widgets.splice(start, 1);
       page.widgets.splice(end, 0, preWidget);
