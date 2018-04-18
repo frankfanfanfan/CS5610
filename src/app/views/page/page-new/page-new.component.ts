@@ -28,7 +28,7 @@ export class PageNewComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      this.userId = params['uid'];
+      // this.userId = params['uid'];
       this.websiteId = params['wid'];
     });
   }

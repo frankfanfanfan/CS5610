@@ -10,7 +10,7 @@ import {Widget} from '../../../../models/widget.model.client';
 })
 export class WidgetHtmlComponent implements OnInit {
 
-  userId: String;
+  // userId: String;
   curWidget: Widget;
 
   constructor(
@@ -37,7 +37,7 @@ export class WidgetHtmlComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      this.userId = params['uid'];
+      // this.userId = params['uid'];
       this.widgetService.findWidgetById(params['wgid']).subscribe(
         (widget: Widget) => {
           this.curWidget = widget;

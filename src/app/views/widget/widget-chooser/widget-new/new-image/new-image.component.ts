@@ -3,6 +3,7 @@ import {WidgetService} from '../../../../../services/widget.service.client';
 import {Widget} from '../../../../../models/widget.model.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../../../../environments/environment';
+import {SharedService} from '../../../../../services/shared.service';
 
 @Component({
   selector: 'app-new-image',
@@ -20,7 +21,8 @@ export class NewImageComponent implements OnInit {
   constructor(
     private widgetService: WidgetService,
     private activateRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private sharedService: SharedService) { }
 
   createImage(text, url, width) {
     const newImage = new Widget(undefined, 'IMAGE', '', 1, text, width, url);
@@ -34,10 +36,10 @@ export class NewImageComponent implements OnInit {
   ngOnInit() {
     this.baseUrl = environment.baseUrl;
     this.activateRoute.params.subscribe((params: any) => {
-      this.userId = params['uid'];
+      this.userId = this.sharedService.user._id;
       this.webId = params['wid'];
       this.pageId = params['pid'];
-      this.wgId = 'newId';
+      this.wgId = params['wgid'];
     });
   }
 }

@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class WidgetYoutubeComponent implements OnInit {
 
-  userId: String;
+  // userId: String;
   curWidget: Widget;
 
   constructor(
@@ -37,7 +37,7 @@ export class WidgetYoutubeComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      this.userId = params['uid'];
+      // this.userId = params['uid'];
       this.widgetService.findWidgetById(params['wgid']).subscribe(
         (widget: Widget) => {
           this.curWidget = widget;

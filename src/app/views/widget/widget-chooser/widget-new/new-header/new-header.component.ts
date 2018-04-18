@@ -16,8 +16,8 @@ export class NewHeaderComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router) { }
 
-  createHeader(text, size) {
-    const newHeader = new Widget(undefined, 'HEADING', '', size, text, '', '');
+  createHeader(text, size, name) {
+    const newHeader = new Widget(undefined, 'HEADING', '', size, text, '', '', name);
     this.widgetService.createWidget(this.pageId, newHeader).subscribe(
       () => {
         this.router.navigate(['../..'], {relativeTo: this.activateRoute});

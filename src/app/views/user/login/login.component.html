@@ -8,10 +8,16 @@
 
     <span class="help-block" *ngIf="!username.valid && username.touched">
         Please enter username!
-  </span>
+    </span>
+
     <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Login</button>
-    <a class="btn btn-success btn-block"
-       [routerLink]="['/register']">Register</a>
+
+    <a href="http://localhost:3100/facebook/login" class="btn btn-primary btn-block">
+      <span class="fa fa-facebook"></span>
+      Facebook
+    </a>
+
+    <a class="btn btn-success btn-block" [routerLink]="['/register']">Register</a>
 
   </form>
 </div>

@@ -15,7 +15,7 @@ export class FlickrImageSearchComponent implements OnInit {
   photos: any[];
   websiteId;
   pageId;
-  userId;
+  // userId;
   widgetId;
   widget;
 
@@ -44,28 +44,18 @@ export class FlickrImageSearchComponent implements OnInit {
   selectPhoto(photo) {
     let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
     url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
-
-    if (this.widgetId === 'newId') {
-      const newImage = new Widget(undefined, 'IMAGE', '', 1, '', '', url);
-      this.widgetService.createWidget(this.pageId, newImage).subscribe(
-        () => {
-          this.router.navigate(['../..'], {relativeTo: this.activateRoute});
-        }
-      );
-    } else {
-      this.widget.url = url;
-      this.widgetService.updateWidget(this.widget).subscribe(
-        () => {
-          this.router.navigate(['../..'], {relativeTo: this.activateRoute});
-        }
-      );
-    }
+    this.widget.url = url;
+    this.widgetService.updateWidget(this.widget).subscribe(
+      () => {
+        this.router.navigate(['../..'], {relativeTo: this.activateRoute});
+      }
+    );
   }
 
   ngOnInit() {
       this.activateRoute.params.subscribe((params: any) => {
         this.photos = [];
-        this.userId = params['uid'];
+        // this.userId = params['uid'];
         this.websiteId = params['wid'];
         this.pageId = params['pid'];
         this.widgetId = params['wgid'];

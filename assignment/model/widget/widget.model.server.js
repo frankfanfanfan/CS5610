@@ -62,7 +62,7 @@ function deleteWidget(widgetId) {
           page.save();
         })
     });
-  return widgetModel.remove({_id: widgetId});
+  return widgetModel.deleteOne({_id: widgetId});
 }
 
 function reorderWidget(pageId, start, end) {

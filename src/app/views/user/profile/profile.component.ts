@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../models/user.model.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,9 @@ export class ProfileComponent implements OnInit {
   user: User;
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private sharedService: SharedService) { }
 
   updateUser(changed_user) {
     this.route.params.subscribe(params => {
@@ -27,14 +30,22 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => this.router.navigate(['/login'])
+      );
+  }
+
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.userService.findUserById(params['uid'])
-        .subscribe((user: User) => {
-          this.user = user;
-          console.log(user);
-        });
-    });
+    // this.route.params.subscribe(params => {
+    //   this.userService.findUserById(params['uid'])
+    //     .subscribe((user: User) => {
+    //       this.user = user;
+    //       console.log(user);
+    //     });
+    // });
+    this.user = this.sharedService.user;
   }
 
 }

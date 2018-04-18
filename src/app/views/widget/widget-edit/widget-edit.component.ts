@@ -10,7 +10,6 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class WidgetEditComponent implements OnInit {
 
-  userId: String;
   widget: Widget;
   constructor(
     private widgetService: WidgetService,
@@ -18,7 +17,6 @@ export class WidgetEditComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
-      this.userId = params['uid'];
       this.widgetService.findWidgetById(params['wgid']).subscribe(
         (widget: Widget) => {
           this.widget = widget;

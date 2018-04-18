@@ -3,6 +3,7 @@ import { Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../models/user.model.client';
 import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service';
 
 
 @Component({
@@ -15,12 +16,11 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm: NgForm;
   username: String; // see usage as two-way data binding
   password: String; // see usage as two-way data binding
-  errorFlag: boolean;
-  errorMsg = 'Invalid username or password !';
 
   constructor(
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private sharedService: SharedService) { }
 
   // login() {
   //   this.username = this.loginForm.value.username;
@@ -38,13 +38,23 @@ export class LoginComponent implements OnInit {
   login() {
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-    this.userService.findUserByCredential(this.username, this.password)
-      .subscribe((user: User) => {
-        if (user) {
-          console.log(user);
-          this.router.navigate(['/user', user._id ]);
-        }
-      });
+
+    // this.userService.findUserByCredential(this.username, this.password)
+    //   .subscribe((user: User) => {
+    //     if (user) {
+    //       console.log(user);
+    //       this.router.navigate(['/user', user._id ]);
+    //     }
+    //   });
+    this.userService.login(this.username, this.password)
+      .subscribe(
+        (data: any) => {
+          console.log(this.username);
+          this.sharedService.user = data;
+          this.router.navigate(['/user']);
+          }, (error: any) => {
+          console.log(error);
+        });
   }
 
   ngOnInit() {
